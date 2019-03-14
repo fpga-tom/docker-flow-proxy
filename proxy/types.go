@@ -57,6 +57,7 @@ type ServiceDest struct {
 	// The domain of the service.
 	// If set, the proxy will allow access only to requests coming to that domain.
 	ServiceDomain []string
+	BackendExtraLine []string
 	// Name of service group used by tcp groups
 	ServiceGroup string
 	// Headers used to filter requests
@@ -388,7 +389,7 @@ func getServiceDestList(sr *Service, provider ServiceParameterProvider) []Servic
 	if !httpsOnly {
 		httpsOnly, _ = strconv.ParseBool(os.Getenv("HTTPS_ONLY"))
 	}
-	for i := 1; i <= 10; i++ {
+	for i := 1; i <= 100; i++ {
 		sd := getServiceDest(sr, provider, i)
 		if isServiceDestValid(provider, i) {
 			sdList = append(sdList, sd)
@@ -484,6 +485,7 @@ func getServiceDest(sr *Service, provider ServiceParameterProvider, index int) S
 		ReqPathSearchReplace:          reqPathSearchReplace,
 		ReqPathSearchReplaceFormatted: reqPathSearchReplaceFormatted,
 		ServiceDomain:                 getSliceFromString(provider, "serviceDomain", suffix),
+		BackendExtraLine:                 getSliceFromString(provider, "backendExtraLine", suffix),
 		ServiceGroup:                  getFromString(provider, "serviceGroup", suffix),
 		ServiceHeader:                 header,
 		ServicePath:                   getSliceFromString(provider, "servicePath", suffix),

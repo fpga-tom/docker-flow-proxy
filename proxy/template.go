@@ -316,6 +316,9 @@ backend {{$.AclName}}-be{{$sd.Port}}_{{.Index}}
         {{- if ne $.BackendExtra ""}}
     {{ $.BackendExtra }}
         {{- end}}
+        {{- if $sd.BackendExtraLine}}
+    {{range $sd.BackendExtraLine}}{{.}}{{end}}
+        {{- end}}
 {{- end}}
 {{- end}}
 {{- range $sd := .ServiceDest}}
@@ -383,6 +386,9 @@ backend https-{{$.AclName}}-be{{.HttpsPort}}_{{.Index}}
             {{- end}}
             {{- if ne $.BackendExtra ""}}
     {{ $.BackendExtra }}
+            {{- end}}
+            {{- if $sd.BackendExtraLine}}
+    {{range $sd.BackendExtraLine}}{{.}}{{end}}
             {{- end}}
     {{- end}}
 {{- end}}`

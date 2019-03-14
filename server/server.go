@@ -314,7 +314,7 @@ func (m *serve) getServiceFromEnvVars(prefix string) (proxy.Service, error) {
 			},
 		)
 	}
-	for i := 1; i <= 10; i++ {
+	for i := 1; i <= 100; i++ {
 		domain := getSliceFromString(os.Getenv(fmt.Sprintf("%s_SERVICE_DOMAIN_%d", prefix, i)))
 		port := os.Getenv(fmt.Sprintf("%s_PORT_%d", prefix, i))
 		path := getSliceFromString(os.Getenv(fmt.Sprintf("%s_SERVICE_PATH_%d", prefix, i)))
