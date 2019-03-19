@@ -317,7 +317,7 @@ backend {{$.AclName}}-be{{$sd.Port}}_{{.Index}}
     {{ $.BackendExtra }}
         {{- end}}
         {{- if $sd.BackendExtraLine}}
-    {{range $sd.BackendExtraLine}}{{.}}{{end}}
+    {{range $sd.BackendExtraLine}}{{ printf "%s\n" . }}{{end}}
         {{- end}}
 {{- end}}
 {{- end}}
@@ -388,7 +388,7 @@ backend https-{{$.AclName}}-be{{.HttpsPort}}_{{.Index}}
     {{ $.BackendExtra }}
             {{- end}}
             {{- if $sd.BackendExtraLine}}
-    {{range $sd.BackendExtraLine}}{{.}}{{end}}
+    {{range $sd.BackendExtraLine}}{{ printf "%s\n" . }}{{end}}
             {{- end}}
     {{- end}}
 {{- end}}`
